@@ -2,6 +2,7 @@ from rental import Rental
 from movie import Movie
 import logging
 
+
 class Customer:
     """A customer who rents movies.
 
@@ -42,7 +43,7 @@ class Customer:
         
         for rental in self.rentals:
             # compute the frequent renter points based on movie price code
-            frequent_renter_points = rental.rental_points(frequent_renter_points)
+            frequent_renter_points += rental.rental_points()
             #  add a detail line to statement
             statement += rental_fmt.format(
                             rental.get_movie().get_title(), 
