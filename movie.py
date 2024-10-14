@@ -2,6 +2,13 @@ from abc import ABC, abstractmethod
 
 
 class PriceStrategy(ABC):
+    _instance = None
+
+    @classmethod
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super(PriceStrategy, cls).__new__(cls)
+        return cls._instance
 
     @abstractmethod
     def get_price(self, days: int) -> float:
@@ -15,9 +22,6 @@ class PriceStrategy(ABC):
 
 
 class ChildrenPrice(PriceStrategy):
-    def __init__(self):
-        super().__init__()
-        pass
 
     def get_price(self, days):
         amount = 1.5
@@ -30,9 +34,6 @@ class ChildrenPrice(PriceStrategy):
 
 
 class NewRelease(PriceStrategy):
-    def __init__(self):
-        super().__init__()
-        pass
 
     def get_price(self, days):
         return 3 * days
@@ -42,9 +43,6 @@ class NewRelease(PriceStrategy):
 
 
 class RegularPrice(PriceStrategy):
-    def __init__(self):
-        super().__init__()
-        pass
 
     def get_price(self, days):
         amount = 2.0
