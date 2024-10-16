@@ -45,7 +45,7 @@ class CustomerTest(unittest.TestCase):
             Rental(self.childrens_movie, 5),
             Rental(self.regular_movie, 5)
         ]
-        self.assertEqual(customer.get_total_amount(), 26)
+        self.assertEqual(customer.get_total_charge(), 26)
 
     def test_calculate_rental_points(self):
         customer = Customer("Mim")
@@ -54,7 +54,7 @@ class CustomerTest(unittest.TestCase):
             Rental(self.childrens_movie, 5),
             Rental(self.regular_movie, 5)
         ]
-        self.assertEqual(customer.get_rental_points(), 7)
+        self.assertEqual(customer.get_total_rental_points(), 7)
 
 
 
