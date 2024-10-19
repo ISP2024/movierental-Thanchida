@@ -32,7 +32,8 @@ class CustomerTest(unittest.TestCase):
         self.assertIsNotNone(matches)
         self.assertEqual("0.00", matches[1])
         # add a rental
-        self.c.add_rental(Rental(self.new_movie, 4)) # days
+        self.c.add_rental(Rental(self.new_movie, 4,
+                                 self.new_movie.price_strategy)) # days
         stmt = self.c.statement()
         matches = re.match(pattern, stmt.replace('\n',''), flags=re.DOTALL)
         self.assertIsNotNone(matches)
@@ -41,18 +42,24 @@ class CustomerTest(unittest.TestCase):
     def test_calculate_total_amount(self):
         customer = Customer("Mim")
         customer.rentals = [
-            Rental(self.new_movie, 5),
-            Rental(self.childrens_movie, 5),
-            Rental(self.regular_movie, 5)
+            Rental(self.new_movie, 5,
+                   self.new_movie.price_strategy),
+            Rental(self.childrens_movie, 5,
+                   self.childrens_movie.price_strategy),
+            Rental(self.regular_movie, 5,
+                   self.regular_movie.price_strategy)
         ]
         self.assertEqual(customer.get_total_charge(), 26)
 
     def test_calculate_rental_points(self):
         customer = Customer("Mim")
         customer.rentals = [
-            Rental(self.new_movie, 5),
-            Rental(self.childrens_movie, 5),
-            Rental(self.regular_movie, 5)
+            Rental(self.new_movie, 5,
+                   self.new_movie.price_strategy),
+            Rental(self.childrens_movie, 5,
+                   self.childrens_movie.price_strategy),
+            Rental(self.regular_movie, 5,
+                   self.regular_movie.price_strategy)
         ]
         self.assertEqual(customer.get_total_rental_points(), 7)
 
