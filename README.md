@@ -16,13 +16,21 @@ Before and after each refactoring you should **run the unit tests**.
 
 
 ## Rationale
-2.1 what refactoring signs (code smells) suggest this refactoring?
-- Middle Man: The `Movie` class acts as a "middle man" between `Rental` and `Pricestrategy` by requiring Rental to 
+### 2.1 What refactoring signs (code smells) suggest this refactoring?
+- **Middle Man**: The `Movie` class acts as a "middle man" between `Rental` and `Pricestrategy` by requiring Rental to 
 call Movie to access pricing data.
 
-2.2 what design principle suggests this refactoring? Why?
-- Single Responsibility Principle: To separate responsibilities between the `Movie` class, which should focus only on 
+### 2.2 What design principle suggests this refactoring? Why?
+- **Single Responsibility Principle**: To separate responsibilities between the `Movie` class, which should focus only on 
 movie data, and the `Rental` class, which should handle the rental process and pricing logic
+
+### 5.2 The reason of my choice
+- **I choose to implement in `PriceStrategy`**
+- **Low Coupling**: By Implementing in the `PriceStrategy` class it reduces dependencies between this pricing logic 
+and other classes. This allows changes to the pricing logic to be made independently, ensuring that modifications do 
+not impact other class.
+- **Single Responsibility Principle**: The `PriceStrategy` contain all responsibility about pricing logic.
+- **High Cohesion**: All the `PriceStrategy` components work together to serve a pricing function.
 
 ## Resources
 
