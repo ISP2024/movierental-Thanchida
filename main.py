@@ -1,6 +1,6 @@
 # Demonstrate the movie rental code.
 # Create a customer with some movies and print a statement.
-
+from datetime import datetime
 from movie import Movie
 from rental import Rental
 from customer import Customer
@@ -19,20 +19,11 @@ def make_movies():
     return movies
 
 
-def make_price_code():
-    price_code = [NewRelease(), RegularPrice(),
-                  ChildrenPrice(), NewRelease(), RegularPrice()]
-    return price_code
-
-
 if __name__ == '__main__':
     # Create a customer with some rentals
     customer = Customer("Edward Snowden")
-    price_code = make_price_code()
     days = 1
-    code = 0
     for movie in make_movies():
-        customer.add_rental(Rental(movie, days, price_code[code]))
+        customer.add_rental(Rental(movie, days, movie.price_code_for_movie()))
         days = (days + 2) % 5 + 1
-        code += 1
     print(customer.statement())
