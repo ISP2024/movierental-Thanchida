@@ -10,11 +10,11 @@ from pricing import RegularPrice, NewRelease, ChildrenPrice
 def make_movies():
     """Some sample movies."""
     movies = [
-        Movie("Air"),
-        Movie("Oppenheimer"),
-        Movie("Frozen"),
-        Movie("Bitconned"),
-        Movie("Particle Fever")
+        Movie("Air", 2023, ["Drama", "Sports"]),
+        Movie("Oppenheimer", 2023, ["Drama", "Biography", "History"]),
+        Movie("Frozen", 2013, ["Animation", "Adventure", "Family"]),
+        Movie("Bitconned", 2023, ["Thriller", "Crime"]),
+        Movie("Particle Fever", 2013, ["Documentary", "Science"])
     ]
     return movies
 

@@ -44,7 +44,7 @@ class Customer:
             # compute the frequent renter points based on movie price code
             #  add a detail line to statement
             statement += rental_fmt.format(
-                            rental.get_movie().get_title(), 
+                            str(rental.get_movie()),
                             rental.get_days_rented(), 
                             rental.get_price())
             # and accumulate activity

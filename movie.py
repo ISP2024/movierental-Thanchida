@@ -1,18 +1,19 @@
 from dataclasses import dataclass
 from typing import Collection
-from pricing import RegularPrice, NewRelease, ChildrenPrice
 
 
+@dataclass(frozen=True)
 class Movie:
     """
     A movie available for rent.
     """
-    def __init__(self, title):
-        # Initialize a new movie.
-        self.title = title
+    title: str
+    year: int
+    genre: Collection[str]
     
-    def get_title(self):
-        return self.title
+    def is_genre(self, genre):
+        """Return True if genre match any of the movie's genre"""
+        return any(g.lower() == genre.lower() for g in self.genre)
     
     def __str__(self):
-        return self.title
+        return f"{self.title} ({self.year})"
