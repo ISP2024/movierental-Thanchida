@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from datetime import datetime
 
 
 class PriceStrategy(ABC):
@@ -19,6 +20,14 @@ class PriceStrategy(ABC):
     def get_rental_points(self, days: int) -> int:
         """The frequent renter points earned for this rental."""
         pass
+
+    @staticmethod
+    def price_code_for_movie(movie):
+        if movie.year == datetime.now().year:
+            return NewRelease()
+        elif any(genre.lower() in ['children', 'childrens'] for genre in movie.genre):
+            return ChildrenPrice()
+        return RegularPrice()
 
 
 class ChildrenPrice(PriceStrategy):

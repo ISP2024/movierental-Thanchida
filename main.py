@@ -4,7 +4,7 @@ from datetime import datetime
 from movie import Movie
 from rental import Rental
 from customer import Customer
-from pricing import RegularPrice, NewRelease, ChildrenPrice
+from pricing import RegularPrice, NewRelease, ChildrenPrice, PriceStrategy
 
 
 def make_movies():
@@ -24,6 +24,7 @@ if __name__ == '__main__':
     customer = Customer("Edward Snowden")
     days = 1
     for movie in make_movies():
-        customer.add_rental(Rental(movie, days, movie.price_code_for_movie()))
+        rental_price_code = PriceStrategy.price_code_for_movie(movie)
+        customer.add_rental(Rental(movie, days, rental_price_code))
         days = (days + 2) % 5 + 1
     print(customer.statement())
